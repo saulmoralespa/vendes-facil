@@ -22,6 +22,32 @@ class VendeFacilTest extends TestCase
         $this->assertObjectHasAttribute('token', $token);
     }
 
+    public function testquote()
+    {
+
+        $products = [];
+
+        $products[] = [
+            'alto' => 25,
+            'ancho' => 10,
+            'largo' => 15,
+            'peso' => 2,
+            'unidades' => 1
+        ];
+
+        $params = [
+            'pais_origen' => 'CO',
+            'ciudad_origen' => '05001000',
+            'pais_destino' => 'CO',
+            'ciudad_destino' => '05266000',
+            'valoracion' => '10000',
+            "detalle" => $products
+        ];
+
+        $data = $this->vendeFacil->quote($params);
+        $this->assertObjectHasAttribute('total', $data);
+    }
+
     public function testTransaction()
     {
 

@@ -62,6 +62,31 @@ class Client
     }
 
     /**
+     * @param $params
+     * @return mixed
+     * @throws \Exception
+     */
+    public function quote($params)
+    {
+        try{
+            $response = $this->client()->post("transporte/cotizacion", [
+                "headers" => [
+                    "Authorization" => "Bearer {$this->getAccesToken()->token}"
+                ],
+                "json" => $params
+
+
+            ]);
+
+            return self::responseJson($response);
+
+
+        } catch (RequestException $exception){
+            throw  new  \Exception($exception->getMessage());
+        }
+    }
+
+    /**
      * @param array $params
      * @return mixed
      * @throws \Exception
